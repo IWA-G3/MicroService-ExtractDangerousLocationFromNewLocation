@@ -20,9 +20,9 @@ public class ExtractFromLocationApplication {
 	}
 
 	@Autowired
-	private KafkaTemplate<String, String> kafkaTemplate;
+	private KafkaTemplate<String, LocationKafka> kafkaTemplate;
 
-	public void sendMessage(String msg) {
+	public void sendMessage(LocationKafka msg) {
 		kafkaTemplate.send("dangerous_location", msg);
 	}
 }
