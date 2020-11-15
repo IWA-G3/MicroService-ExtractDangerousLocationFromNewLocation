@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import polytech.group3.iwa.kafka_location_model.LocationKafka;
 
 @SpringBootApplication
 public class ExtractFromLocationApplication {
@@ -14,7 +15,7 @@ public class ExtractFromLocationApplication {
 	}
 
 	@KafkaListener(topics = "location", groupId = "DangerLocationFromLocationListener")
-	public void listen(String message) {
+	public void listen(LocationKafka message) {
 		System.out.println("Received Messages in group - DangerLocationFromLocationListener: " + message);
 	}
 
