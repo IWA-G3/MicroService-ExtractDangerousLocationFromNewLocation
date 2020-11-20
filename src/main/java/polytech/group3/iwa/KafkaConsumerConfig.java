@@ -1,8 +1,5 @@
 package polytech.group3.iwa;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.connect.json.JsonDeserializer;
@@ -12,6 +9,9 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import polytech.group3.iwa.kafka_location_model.LocationKafka;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @EnableKafka
 @Configuration
