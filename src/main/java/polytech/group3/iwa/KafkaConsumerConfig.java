@@ -9,6 +9,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import polytech.group3.iwa.kafka_location_model.LocationKafka;
+import polytech.group3.iwa.model.ContaminationKafka;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
     @Bean
-    public DefaultKafkaConsumerFactory<String, LocationKafka> consumerFactory() {
+    public DefaultKafkaConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "DangerLocationFromLocationListener");
@@ -26,8 +27,15 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(props);
     }
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, LocationKafka> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, LocationKafka> LocationKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, LocationKafka>
+                factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
+    }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, ContaminationKafka> ContaminationKafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, ContaminationKafka>
                 factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
